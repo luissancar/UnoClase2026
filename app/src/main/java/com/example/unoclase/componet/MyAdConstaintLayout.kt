@@ -3,7 +3,10 @@ package com.example.unoclase.componet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,6 +17,7 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 
 
 // Añadir a libs.versions.toml y builsd.gradle
@@ -103,39 +107,45 @@ fun ConstraintChain(modifier: Modifier = Modifier) {
         // Box rojo: centrado horizontalmente, limita arriba con el padre y abajo con el azul
         Box(
             modifier = Modifier
-                .size(150.dp)
                 .background(Color.Red)
                 .constrainAs(boxRed) {
                     start.linkTo(parent.start)   // para centrar, linkeamos start y end al padre...
                     end.linkTo(parent.end)       // ...y el sistema lo centra automáticamente
                     top.linkTo(parent.top)       // parte superior ligada al top del padre
                     bottom.linkTo(boxBlue.top)   // parte inferior ligada al top del azul
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                 }
         )
+
 
         // Box azul: centrado horizontalmente, entre rojo y verde
         Box(
             modifier = Modifier
-                .size(150.dp)
+
                 .background(Color.Blue)
                 .constrainAs(boxBlue) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(boxRed.bottom)    // debajo del rojo
                     bottom.linkTo(boxGreen.top)  // encima del verde
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                 }
         )
 
         // Box verde: centrado horizontalmente, limita abajo con el padre y arriba con el azul
         Box(
             modifier = Modifier
-                .size(150.dp)
                 .background(Color.Green)
                 .constrainAs(boxGreen) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(boxBlue.bottom)   // debajo del azul
                     bottom.linkTo(parent.bottom) // encima del borde inferior del padre
+
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                 }
         )
 
